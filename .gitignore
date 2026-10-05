@@ -1,0 +1,11 @@
+# This package has no runtime dependencies and no build step. A checkout may
+# still create these; none of them belongs in the repository.
+node_modules/
+package-lock.json
+pnpm-lock.yaml
+pnpm-workspace.yaml
+
+# OS and editor noise
+.DS_Store
+Thumbs.db
+*.log

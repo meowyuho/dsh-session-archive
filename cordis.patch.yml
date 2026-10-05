@@ -1,0 +1,6 @@
+# Inserts this bundle's row into the active dsh profile.
+# The Host half mounts the same-origin deletion route; the browser half renders
+# the "归档会话" page inside Settings.
+- insert:
+    - id: session-archive
+      name: 'dsh-session-archive'
