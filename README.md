@@ -4,40 +4,38 @@
 
 dsh 本身只能归档。官方明确写着 *No Session deletion — sessions can be archived but never deleted*，`sessionPersistence` 只有 `create/open/flush/stat/list`，`ctx.fs` 连删除动词都没有——归档之后再想清掉一个会话，没有出口。这个插件把出口补上。
 
-![设置里的「归档会话」页面](docs/archived-sessions.png)
+![设置里的「归档会话」页面](https://raw.githubusercontent.com/meowyuho/dsh-session-archive/main/docs/archived-sessions.png)
 
 ## 安装
 
-**先把 DeepSeek Harness 完全退出**——应用运行时 profile 的 `package.json` 是被锁住的，命令会拿不到锁。
+已发布到 npm。**先把 DeepSeek Harness 完全退出**——应用运行时 profile 的 `package.json` 是被锁住的，命令会拿不到锁：
 
 ```bash
 dsh plugin --profile desktop add dsh-session-archive
 ```
 
-profile 不叫 `desktop` 的话，把 `--profile` 后面的名字换掉。
-
-不想用命令行，或者在界面里装：侧边栏 → **Plugins** → **Add plugin**，填包名或本地目录的绝对路径。
+profile 不叫 `desktop` 的话，把 `--profile` 后面的名字换掉。不想用命令行，也可以走界面：侧边栏 → **Plugins** → **Add plugin**，填包名。
 
 装完**刷新页面**。以后更新时：只改 `client.js` 刷新页面就够；改了 `index.js`（Host 半边）要重启应用——插件的 Host 模块不会因为重新组合而重新加载。
 
-### 还没发布、或想跟着源码跑
+### 从源码装
 
-把仓库 clone 到本地，按目录装：
+clone 下来按目录装。装进去的是 `link:` 依赖，所以目录别装完又挪走：
 
 ```bash
-git clone https://github.com/<你>/dsh-session-archive.git
+git clone https://github.com/meowyuho/dsh-session-archive.git
 dsh plugin --profile desktop add link:<clone 下来的绝对路径>
 ```
 
-路径必须是绝对路径；`link:` 也可以写成 `file:`，或者直接裸给绝对路径。装进去的是 `link:` 依赖，所以目录别装完又挪走——挪了要重装。
+路径必须是绝对路径；`link:` 也可以写成 `file:`，或者直接裸给绝对路径。
 
-也可以按仓库直接装，不用先 clone：
+也可以不 clone，直接按仓库装：
 
 ```bash
-dsh plugin --profile desktop add github:<你的用户名>/dsh-session-archive
+dsh plugin --profile desktop add github:meowyuho/dsh-session-archive
 ```
 
-这两条都会顺手把它注册进 profile 的 bundle 层栈。本包没有构建步骤，所以不会碰到 git 安装那种 `allowBuilds` 提示。
+这两种和上面那条一样，都会顺手把它注册进 profile 的 bundle 层栈。本包没有构建步骤，所以不会碰到 git 安装那种 `allowBuilds` 提示。
 
 ## 用法
 
@@ -46,7 +44,7 @@ dsh plugin --profile desktop add github:<你的用户名>/dsh-session-archive
 - **恢复**：会话回到侧边栏原来的位置。
 - **彻底删除**：点行内「彻底删除」，展开一张确认卡片（写明是哪个会话、日志在哪儿），确认之后才动手。卡片可以按 `Esc` 取消。
 
-![彻底删除的确认卡片](docs/delete-confirm.png)
+![彻底删除的确认卡片](https://raw.githubusercontent.com/meowyuho/dsh-session-archive/main/docs/delete-confirm.png)
 
 ## 删除会删掉什么
 
@@ -88,4 +86,8 @@ node _verify-session-archive.mjs
 
 ## 许可
 
-MIT，见 [LICENSE](LICENSE)。
+MIT，见 [LICENSE](https://github.com/meowyuho/dsh-session-archive/blob/main/LICENSE)。
+
+---
+
+仓库：https://github.com/meowyuho/dsh-session-archive
